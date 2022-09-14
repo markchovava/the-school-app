@@ -47,6 +47,16 @@ Route::prefix('admin')->group(function() {
         Route::get('/',[StudentController::class, 'index'])->name('admin.student');
         Route::get('/add',[StudentController::class, 'add'])->name('admin.student.add');
     });
+
+    Route::prefix('teacher')->group(function() {
+        Route::get('/',[TeacherController::class, 'index'])->name('admin.student');
+        Route::get('/add',[TeacherController::class, 'add'])->name('admin.student.add');
+    });
+
+    Route::prefix('staff')->group(function() {
+        Route::get('/',[StaffController::class, 'index'])->name('admin.staff');
+        Route::get('/add',[StaffController::class, 'add'])->name('admin.staff.add');
+    });
     
     Route::get('/student/class',[StudenClassController::class, 'index'])->name('admin.student.class');
     Route::get('/subject',[SubjectController::class, 'index'])->name('admin.subject');

@@ -74,7 +74,7 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-bold fs-6"><b>Avatar</b></label>
+                                <label class="col-lg-4 col-form-label fw-bold fs-6"> <b>Avatar</b> </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
