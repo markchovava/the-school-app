@@ -39,7 +39,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">Pages</span>
+                        <span class="menu-title">Users</span>
                         <span class="menu-arrow"></span>
                     </span>
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
@@ -48,16 +48,51 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">User Profile</span>
+                                <span class="menu-title">Teachers</span>
                                 <span class="menu-arrow"></span>
                             </span>
                             <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                <div class="menu-item">
+                                    <a class="menu-link" href="{{ route('admin.teacher') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Teacher List</span>
+                                    </a>
+                                </div>
                                 <div class="menu-item">
                                     <a class="menu-link" href="../../demo1/dist/pages/user-profile/overview.html">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
-                                        <span class="menu-title">Overview</span>
+                                        <span class="menu-title">Add Teacher</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                            <span class="menu-link">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Students</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                <div class="menu-item">
+                                    <a class="menu-link" href="{{ route('admin.student')}}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Student List</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" href="{{ route('admin.student.add') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Add Student</span>
                                     </a>
                                 </div>
                             </div>

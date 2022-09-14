@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+@extends('backend.__layouts.master')
 
 @section('backend')
 
