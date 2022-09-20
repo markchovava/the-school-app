@@ -102,6 +102,32 @@ Route::prefix('admin')->group(function() {
     });
 
 
+    Route::prefix('class')->group(function() {
+        Route::prefix('high')->group(function() {
+            Route::get('/', [ClassHighController::class, 'index'])->name('admin.class.high');
+            Route::get('/add', [ClassHighController::class, 'add'])->name('admin.class.high.add');
+            Route::post('/store', [ClassHighController::class, 'store'])->name('admin.class.high.store');
+            Route::get('/search', [ClassHighController::class, 'search'])->name('admin.class.high.search');
+            Route::get('/view/{id}', [ClassHighController::class, 'view'])->name('admin.class.high.view');
+            Route::get('/edit/{id}', [ClassHighController::class, 'edit'])->name('admin.class.high.edit');
+            Route::post('/update/{id}', [ClassHighController::class, 'update'])->name('admin.class.high.update');
+            Route::get('/delete/{id}', [ClassHighController::class, 'delete'])->name('admin.sclass.high.delete');
+        });
+
+        Route::prefix('primary')->group(function() {
+            Route::get('/', [ClassPrimaryController::class, 'index'])->name('admin.class.primary');
+            Route::get('/add', [ClassPrimaryController::class, 'add'])->name('admin.class.primary.add');
+            Route::post('/store', [ClassPrimaryController::class, 'store'])->name('admin.class.primary.store');
+            Route::get('/search', [ClassPrimaryController::class, 'search'])->name('admin.class.primary.search');
+            Route::get('/view/{id}', [ClassPrimaryController::class, 'view'])->name('admin.class.primary.view');
+            Route::get('/edit/{id}', [ClassPrimaryController::class, 'edit'])->name('admin.class.primary.edit');
+            Route::post('/update/{id}', [ClassPrimaryController::class, 'update'])->name('admin.class.primary.update');
+            Route::get('/delete/{id}', [ClassPrimaryController::class, 'delete'])->name('admin.class.primary.delete');
+        });
+        
+    });
+
+
     /* Subject */
     Route::prefix('subject')->group(function() {
         Route::prefix('high')->group(function() {
