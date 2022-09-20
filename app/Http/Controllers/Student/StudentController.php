@@ -14,4 +14,8 @@ class StudentController extends Controller
     public function add(){
         return view('backend.student.add');
     }
+
+   public function view(){
+        return view('backend.student.view');
+   }
 }

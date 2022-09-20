@@ -88,7 +88,7 @@
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
-                                            <input type="file" name="customer_image" accept=".png, .jpg, .jpeg" />
+                                            <input type="file" name="image" accept=".png, .jpg, .jpeg" />
                                             <input type="hidden" name="avatar_remove" />
                                             <!--end::Inputs-->
                                         </label>
@@ -187,7 +187,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
                                     <!--begin::Input-->
-                                    <select name="customer_gender" aria-label="Select a Gender" data-control="select2" 
+                                    <select name="gender" aria-label="Select a Gender" data-control="select2" 
                                     data-placeholder="Select a Gender..." class="form-select form-select-solid form-select-lg">
                                         <option value="">Select a Gender.</option>
                                         <option value="Male">Male</option>
@@ -293,8 +293,8 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
                                      <!--begin::Input-->
-                                     <select name="sponsor" aria-label="Select Sponsor" data-control="select2" 
-                                    data-placeholder="Select Sponsor..." class="form-select form-select-solid form-select-lg">
+                                    <select name="sponsor" aria-label="Select Sponsor" data-control="select2" 
+                                      data-placeholder="Select Sponsor..." class="form-select form-select-solid form-select-lg">
                                         <option value="">Select Sponsor.</option>
                                         <option value="Parent">Parent</option>
                                         <option value="Guardian">Guardian</option>
@@ -366,7 +366,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
-                                    <textarea name="sponsor_address"  class="form-control form-control-lg form-control-solid" 
+                                    <textarea name="sponsor_address" class="form-control form-control-lg form-control-solid" 
                                     placeholder="12, First Street, Avonlea, Harare"></textarea>
                                 </div>
                                 <!--end::Col-->

@@ -59,7 +59,7 @@
                 <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
                     <!--begin::Card title-->
                     <div class="card-title m-0">
-                        <h3 class="fw-bolder m-0">Student Details</h3>
+                        <h3 class="fw-bolder m-0">Staff Details</h3>
                     </div>
                     <!--end::Card title-->
                 </div>
@@ -74,7 +74,7 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-bold fs-6"><b>Avatar</b></label>
+                                <label class="col-lg-4 col-form-label fw-bold fs-6"> <b>Avatar</b> </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
@@ -88,7 +88,7 @@
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
-                                            <input type="file" name="customer_image" accept=".png, .jpg, .jpeg" />
+                                            <input type="file" name="image" accept=".png, .jpg, .jpeg" />
                                             <input type="hidden" name="avatar_remove" />
                                             <!--end::Inputs-->
                                         </label>
@@ -187,11 +187,33 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
                                     <!--begin::Input-->
-                                    <select name="customer_gender" aria-label="Select a Gender" data-control="select2" 
+                                    <select name="gender" aria-label="Select a Gender" data-control="select2" 
                                     data-placeholder="Select a Gender..." class="form-select form-select-solid form-select-lg">
                                         <option value="">Select a Gender.</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
+                                    </select>
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                   <b>Marital Status:</b>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row d-flex">
+                                     <!--begin::Input-->
+                                    <select name="marital_status" aria-label="Select Option..." data-control="select2" 
+                                      data-placeholder="Select Option..." class="form-select form-select-solid form-select-lg">
+                                        <option value="">Select Option...</option>
+                                        <option value="Parent">Single</option>
+                                        <option value="Guardian">Married</option>
+                                        <option value="Other">Other</option>
                                     </select>
                                     <!--end::Input-->
                                 </div>
@@ -265,6 +287,36 @@
                             <div class="row mb-6">
                                 <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                   <b>Qualification:</b>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row d-flex">
+                                    <textarea name="qualification"  class="form-control form-control-lg form-control-solid" 
+                                    placeholder="BSc in Teaching - 2010 - CIS; BSc in Arts - 2009 - CIS"></textarea>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                   <b>Experience:</b>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row d-flex">
+                                    <textarea name="experience"  class="form-control form-control-lg form-control-solid" 
+                                    placeholder="2008 - 2012 Teacher at Allan Wilson"></textarea>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">
                                    <b>Health Condition:</b>
                                 </label>
                                 <!--end::Label-->
@@ -279,7 +331,7 @@
                             
                             <!--begin::Card title-->
                             <div class="card-title m-0 mt-3">
-                                <h3 class="fw-bolder m-0">Parent or Guardian</h3>
+                                <h3 class="fw-bolder m-0">Next of Kin</h3>
                             </div>
                             <!--end::Card title-->
                             <hr>
@@ -287,18 +339,14 @@
                             <div class="row mb-6">
                                 <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                   <b>Sponsor:</b>
+                                   <b>Next of Kin:</b>
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
                                      <!--begin::Input-->
-                                     <select name="sponsor" aria-label="Select Sponsor" data-control="select2" 
-                                    data-placeholder="Select Sponsor..." class="form-select form-select-solid form-select-lg">
-                                        <option value="">Select Sponsor.</option>
-                                        <option value="Parent">Parent</option>
-                                        <option value="Guardian">Guardian</option>
-                                    </select>
+                                     <input type="text" name="next_of_kin" class="form-control form-control-lg form-control-solid" 
+                                     placeholder="Wife or Father etc." />
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Col-->
@@ -316,12 +364,12 @@
                                     <div class="row">
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
-                                            <input type="text" name="sponsor_first_name"  class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Your First Name...." />
+                                            <input type="text" name="kin_first_name"  class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Your First Name...." />
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
-                                            <input type="text" name="sponsor_last_name" class="form-control form-control-lg form-control-solid" 
+                                            <input type="text" name="kin_last_name" class="form-control form-control-lg form-control-solid" 
                                             placeholder="Your Last Name..." />
                                         </div>
                                         <!--end::Col-->
@@ -338,7 +386,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="sponsor_phone_number" class="form-control form-control-lg form-control-solid" 
+                                    <input type="text" name="kin_phone_number" class="form-control form-control-lg form-control-solid" 
                                     placeholder="+263 (0) 782 123123" />
                                 </div>
                                 <!--end::Col-->
@@ -351,7 +399,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="sponsor_email" class="form-control form-control-lg form-control-solid" 
+                                    <input type="text" name="kin_email" class="form-control form-control-lg form-control-solid" 
                                     placeholder="abc@example.com" />
                                 </div>
                                 <!--end::Col-->
@@ -366,12 +414,13 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
-                                    <textarea name="sponsor_address"  class="form-control form-control-lg form-control-solid" 
+                                    <textarea name="kin_address"  class="form-control form-control-lg form-control-solid" 
                                     placeholder="12, First Street, Avonlea, Harare"></textarea>
                                 </div>
                                 <!--end::Col-->
                             </div>
                             <!--end::Input group-->
+                            
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
@@ -379,7 +428,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="sponsor_occupation" class="form-control form-control-lg form-control-solid" 
+                                    <input type="text" name="kin_occupation" class="form-control form-control-lg form-control-solid" 
                                     placeholder="Managing Director" />
                                 </div>
                                 <!--end::Col-->
@@ -392,7 +441,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="sponsor_company_name" class="form-control form-control-lg form-control-solid" 
+                                    <input type="text" name="kin_company_name" class="form-control form-control-lg form-control-solid" 
                                     placeholder="Old Mutual" />
                                 </div>
                                 <!--end::Col-->
