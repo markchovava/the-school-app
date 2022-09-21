@@ -2,6 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Health\Health;
+use App\Models\Role\Role;
+use App\Models\School\School;
+use App\Models\Student\Student;
+use App\Models\User\UserType;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -60,4 +65,28 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Relationships  
+    **/
+
+    public function role(){
+        return $this->belongsTo(Role::class, 'role_id', 'id');
+    }
+
+    public function usertype(){
+        return $this->belongsTo(UserType::class, 'user_type_id', 'id');
+    }
+
+    public function school(){
+        return $this->belongsTo(School::class, 'school_id', 'id');
+    }
+
+    public function health(){
+        return $this->hasOne(Health::class, 'user_id', 'id');
+    }
+
+    public function student(){
+        return $this->hasOne(Student::class, 'user_id', 'id');
+    }
 }

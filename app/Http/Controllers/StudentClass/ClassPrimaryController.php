@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\StudentClass;
 
 use App\Http\Controllers\Controller;
+use App\Models\Grade\Grade;
 use App\Models\StudentClass\ClassPrimary;
 use Illuminate\Http\Request;
 
@@ -30,12 +31,15 @@ class ClassPrimaryController extends Controller
 
     public function add(){
         $data['school'] = $this->school;
+        $grades = Grade::orderBy('name', 'ASC')->get();
+        $data['grades'] = $grades;
         return view('backend.student_class.primary.add', $data);
     }
 
     public function store(Request $request){
         $student_class = new ClassPrimary();
         $student_class->name = $request->name;
+        $student_class->grade_id = $request->grade_id;
         $student_class->save();
 
         return redirect()->route('admin.student_class.primary');
@@ -51,6 +55,7 @@ class ClassPrimaryController extends Controller
     public function update(Request $request, $id){
         $student_class = ClassPrimary::find($id);
         $student_class->name = $request->name;
+        $student_class->grade_id = $request->grade_id;
         $student_class->save();
 
         return redirect()->route('admin.student_class.primary');

@@ -11,7 +11,7 @@
             <!--begin::Page title-->
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">User Types</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Student Classes</h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -20,7 +20,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="#" class="text-muted text-hover-primary">Dashboard</a>
+                        <a href="{{ url('/') }}" class="text-muted text-hover-primary">Dashboard</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">User Types</li>
+                    <li class="breadcrumb-item text-muted">{{ isset($school) ? $school : '' }}</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -37,7 +37,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark">User Type List</li>
+                    <li class="breadcrumb-item text-dark">Student Class List</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -58,7 +58,7 @@
                     <!--begin::Card title-->
                     <div class="card-title">
                         <!--begin::Search-->
-                        <form method="GET" action="{{ route('admin.usertype.search') }}" class="d-flex align-items-center position-relative my-1">
+                        <form method="GET" action="{{ route('admin.student_class.primary.search') }}" class="d-flex align-items-center position-relative my-1">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                             <span class="svg-icon svg-icon-1 position-absolute ms-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -68,7 +68,7 @@
                             </span>
                             <!--end::Svg Icon-->
                             <input type="text" name="search" class="form-control form-control-solid w-250px ps-14" 
-                            placeholder="Search User Type." value="{{ isset($search) ? $search : '' }}" />
+                            placeholder="Search Sport." value="{{ isset($search) ? $search : '' }}" />
                         </form>
                         <!--end::Search-->
                     </div>
@@ -76,7 +76,7 @@
                     <!--begin::Card toolbar-->
                     <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
                         <!--begin::Add product-->
-                        <a href="{{ route('admin.usertype.add') }}" class="btn btn-primary">Add User Type</a>
+                        <a href="{{ route('admin.student_class.primary.add') }}" class="btn btn-primary">Add Student Class</a>
                         <!--end::Add product-->
                     </div>
                     <!--end::Card toolbar-->
@@ -84,7 +84,7 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
-                    @if( isset($usertypes) )
+                    @if( $student_classes !== NULL || isset($student_classes) )
                     <!--begin::Table-->
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
                         <!--begin::Table head-->
@@ -93,8 +93,8 @@
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th style="width:10%;" class="pe-2"> # </th>
                                 <th style="width:40%;"> Name </th>
-                                <th style="width:25%;"> Level </th>
-                                <th style="width:25%;" class="text-end"> Actions </th>
+                                <th style="width:35%;"> Form </th>
+                                <th style="width:15%;" class="text-end"> Actions </th>
                             </tr>
                             <!--end::Table row-->
                         </thead>
@@ -102,7 +102,7 @@
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
                             @php( $i = 1 )
-                            @foreach($usertypes as $usertype)
+                            @foreach($student_classes as $student_class)
                             <!--begin:: row-->
                             <tr>
                                 <!--begin::Checkbox-->
@@ -111,37 +111,10 @@
                                 </td>
                                 <!--end::Checkbox-->
                                 <!--begin::=-->
-                                <td> {{ $usertype->name }} </td>
+                                <td> {{ $student_class->name }} </td>
                                 <!--end::=-->
                                 <!--begin::=-->
-                                <td> 
-                                    @if($usertype->level == 1 )
-                                        Student
-                                    @elseif($usertype->level == 2 ) 
-                                        Teacher
-                                    @elseif($usertype->level == 3 ) 
-                                        HOD
-                                    @elseif($usertype->level == 4 ) 
-                                        Senior Teacher
-                                    @elseif($usertype->level == 5 ) 
-                                        Bursar
-                                    @elseif($usertype->level == 6 ) 
-                                        Accounts
-                                    @elseif($usertype->level == 7 ) 
-                                        Sports
-                                    @elseif($usertype->level == 8 ) 
-                                        Library
-                                    @elseif($usertype->level == 9 ) 
-                                        Club
-                                    @elseif($usertype->level == 10 ) 
-                                        Front Office
-                                    @elseif($usertype->level == 11 )
-                                        Staff
-                                    @elseif($usertype->level == 12 ) 
-                                        Head
-                                    @endif
-                
-                                </td>
+                                <td> {{ $student_class->grade->name }} </td>
                                 <!--end::=-->
                                 <!--begin::-->
                                 <td class="text-end">
@@ -157,17 +130,17 @@
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.usertype.edit', $usertype->id) }}" class="menu-link px-3">Edit</a>
+                                            <a href="{{ route('admin.student_class.primary.edit', $student_class->id) }}" class="menu-link px-3">Edit</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.usertype.view', $usertype->id) }}" class="menu-link px-3">View</a>
+                                            <a href="{{ route('admin.student_class.primary.view', $student_class->id) }}" class="menu-link px-3">View</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.usertype.delete', $usertype->id) }}" class="menu-link px-3">Delete</a>
+                                            <a href="{{ route('admin.student_class.primary.delete', $student_class->id) }}" class="menu-link px-3">Delete</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>
@@ -182,7 +155,7 @@
                     </table>
                     <!--end::Table-->
                         <div class="my-2 d-flex justify-content-end">
-                            {{ $usertypes->links() }}
+                            {{ $student_classes->links() }}
                         </div>
                     @endif
 
@@ -194,8 +167,9 @@
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th style="width:10%;" class="pe-2"> # </th>
-                                <th style="width:65%;"> Name </th>
-                                <th style="width:25%;" class="text-end"> Actions </th>
+                                <th style="width:40%;"> Name </th>
+                                <th style="width:35%;"> Level </th>
+                                <th style="width:15%;" class="text-end"> Actions </th>
                             </tr>
                             <!--end::Table row-->
                         </thead>
@@ -203,7 +177,7 @@
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
                             @php( $i = 1 )
-                            @foreach($results as $usertype)
+                            @foreach($results as $student_class)
                             <!--begin:: row-->
                             <tr>
                                 <!--begin::Checkbox-->
@@ -212,11 +186,14 @@
                                 </td>
                                 <!--end::Checkbox-->
                                 <!--begin::=-->
-                                <td> {{ $usertype->name }} </td>
+                                <td> {{ $student_class->name }} </td>
+                                <!--end::=-->
+                                <!--begin::=-->
+                                <td> {{ $student_class->grade->name }} </td>
                                 <!--end::=-->
                                 <!--begin::-->
                                 <td class="text-end">
-                                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+                                    <a href="javascript:;" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                                     <span class="svg-icon svg-icon-5 m-0">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -228,17 +205,17 @@
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.usertype.edit', $usertype->id) }}" class="menu-link px-3">Edit</a>
+                                            <a href="{{ route('admin.student_class.primary.edit', $student_class->id) }}" class="menu-link px-3">Edit</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.usertype.view', $usertype->id) }}" class="menu-link px-3">View</a>
+                                            <a href="{{ route('admin.student_class.primary.view', $student_class->id) }}" class="menu-link px-3">View</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.usertype.delete', $usertype->id) }}" class="menu-link px-3">Delete</a>
+                                            <a href="{{ route('admin.student_class.primary.delete', $student_class->id) }}" class="menu-link px-3">Delete</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>

@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Models\User;
+namespace App\Models\School;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserType extends Model
+class School extends Model
 {
     use HasFactory;
-    
-    protected $fillable = [
-        'name',	'level'
-    ];
+
+    protected $fillable = ['name'];
 }

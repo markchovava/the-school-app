@@ -1,5 +1,5 @@
-<head><base href="../../../">
-    <title></title>
+<head><base href="{{ url('/') }}">
+    <title>{{ isset($title) ? 'School App | ' . $title : 'School App'}}</title>
     <meta charset="utf-8" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />

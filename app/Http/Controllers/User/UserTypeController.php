@@ -39,6 +39,7 @@ class UserTypeController extends Controller
     public function store(Request $request){
         $usertype = new UserType();
         $usertype->name = $request->name;
+        $usertype->level = $request->level;
         $usertype->created_at = now();
         $usertype->save(); 
 
@@ -64,6 +65,7 @@ class UserTypeController extends Controller
         $usertype = UserType::find($id);
         $usertype->updated_at = now();
         $usertype->name = $request->name;
+        $usertype->level = $request->level;
         $usertype->save(); 
 
         return redirect()->route('admin.usertype');

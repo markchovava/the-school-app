@@ -11,7 +11,7 @@
             <!--begin::Page title-->
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">User Type</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">School</h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -37,7 +37,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark">User Type</li>
+                    <li class="breadcrumb-item text-dark">School</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -59,7 +59,7 @@
                 <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
                     <!--begin::Card title-->
                     <div class="card-title m-0">
-                        <h3 class="fw-bolder m-0">User Type</h3>
+                        <h3 class="fw-bolder m-0">School</h3>
                     </div>
                     <!--end::Card title-->
                 </div>
@@ -75,51 +75,12 @@
                             <div class="row mb-6">
                                 <!--begin::Label-->
                                 <label class="col-lg-4 fw-bold fs-6">
-                                    <b>User Type Name:</b></label>
+                                    <b>School Name:</b></label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fw-bold fs-6">
                                     <!--begin::-->
-                                    {{ $usertype->name }}
-                                    <!--end::-->
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 fw-bold fs-6">
-                                    <b>User Type Level:</b></label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fw-bold fs-6">
-                                    <!--begin::-->
-                                    @if($usertype->level == 1 )
-                                        Student
-                                    @elseif($usertype->level == 2 ) 
-                                        Teacher
-                                    @elseif($usertype->level == 3 ) 
-                                        HOD
-                                    @elseif($usertype->level == 4 ) 
-                                        Senior Teacher
-                                    @elseif($usertype->level == 5 ) 
-                                        Bursar
-                                    @elseif($usertype->level == 6 ) 
-                                        Accounts
-                                    @elseif($usertype->level == 7 ) 
-                                        Sports
-                                    @elseif($usertype->level == 8 ) 
-                                        Library
-                                    @elseif($usertype->level == 9 ) 
-                                        Club
-                                    @elseif($usertype->level == 10 ) 
-                                        Front Office
-                                    @elseif($usertype->level == 11 )
-                                        Staff
-                                    @elseif($usertype->level == 12 ) 
-                                        Head
-                                    @endif
+                                    {{ $school->name }}
                                     <!--end::-->
                                 </div>
                                 <!--end::Col-->
@@ -130,9 +91,7 @@
 
                         <!--begin::Actions-->
                         <div class="card-footer d-flex justify-content-end py-6 px-9">
-                           <a href="{{ route('admin.usertype') }}">
-                            <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">All User Types</button>
-                           </a>
+                           <a href="{{ route('admin.school') }}" class="btn btn-primary">All Schools </a>
                         </div>
                         <!--end::Actions-->
                     </div>

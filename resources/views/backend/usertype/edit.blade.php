@@ -88,6 +88,39 @@
                                 <!--end::Col-->
                             </div>
                             <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                    <span class="required"><b>Access Level:</b></span>
+                                </label>
+                                <!--end::Label-->       
+                               <!--begin::Col-->
+                                <div class="col-lg-8 fv-row d-flex">
+                                    <!--begin::Input-->
+                                    <select name="level" aria-label="Select an option." data-control="select2" 
+                                        placeholder="Select an option." class="form-select form-select-solid form-select-lg">
+                                        <option value="">Select an option.</option>
+                                        <option value="1" {{ $usertype->level == 1 ? 'selected="selected"' : ''}} >Student</option>
+                                        <option value="2" {{ $usertype->level == 2 ? 'selected="selected"' : ''}} >Teacher</option>
+                                        <option value="3" {{ $usertype->level == 3 ? 'selected="selected"' : ''}} >HOD</option>
+                                        <option value="4" {{ $usertype->level == 4 ? 'selected="selected"' : ''}} >Senior Teacher</option>
+                                        <option value="5" {{ $usertype->level == 5 ? 'selected="selected"' : ''}} >Bursar</option>
+                                        <option value="6" {{ $usertype->level == 6 ? 'selected="selected"' : ''}} >Accounts</option>
+                                        <option value="7" {{ $usertype->level == 7 ? 'selected="selected"' : ''}} >Sports</option>
+                                        <option value="8" {{ $usertype->level == 8 ? 'selected="selected"' : ''}} >Library</option>
+                                        <option value="9" {{ $usertype->level == 9 ? 'selected="selected"' : ''}} >Club</option>
+                                        <option value="10" {{ $usertype->level == 10 ? 'selected="selected"' : ''}} >Front Office</option>
+                                        <option value="11" {{ $usertype->level == 11 ? 'selected="selected"' : ''}} >Staff </option>
+                                        <option value="12" {{ $usertype->level == 12 ? 'selected="selected"' : ''}} >Head</option>
+                                    </select>
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
                         </div>
                         <!--end::Card body-->
 

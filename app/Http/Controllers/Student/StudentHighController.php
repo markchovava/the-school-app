@@ -5,29 +5,55 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 use App\Models\Health\Health;
 use App\Models\Role\Role;
+use App\Models\School\School;
 use App\Models\Student\Student;
 use App\Models\User;
 use App\Models\User\UserType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class StudentController extends Controller
+class StudentHighController extends Controller
 {
+    protected $title = 'High School';
+
+    /* List All Students in High School Only */
     public function index(){
-        $students = User::with(['role', 'usertype'])->orderBy('name', 'ASC')->paginate(15);
+        $school = School::where('name', 'LIKE', '%' . 'High' . '%')->first();
+        $usertype = UserType::where('level', 1)->first();
+        $students = User::with(['role', 'usertype'])
+                    ->where('school_id', 'LIKE', '%' . $school->id . '%')
+                    ->where('user_type_id', $usertype->id )
+                    ->orderBy('name', 'ASC')->paginate(15);
         $data['students'] = $students;
-        return view('backend.student.index', $data);
+        $data['title'] = $this->title;
+        return view('backend.student.high.index', $data);
+    }
+
+    /* Search Students in High School Only */
+    public function search(Request $request){
+        $search = $request->search;
+        $school = School::where('name', 'LIKE', '%' . 'High' . '%')->first();
+        $results = User::with(['role', 'usertype', 'school'])
+                        ->where('name', 'LIKE', '%' . $search . '%')
+                        ->Where('school_id', 'LIKE', '%' . $school->id . '%')
+                        ->orderBy('name', 'ASC')
+                        ->paginate(15);
+        $data['results'] = $results;
+        $data['title'] = $this->title;
+        return view('backend.student.high.index', $data);
     }
 
     public function add(){
         /* Student Role level is 4 */
-        $role = Role::where('level', 'LIKE', 4)->first();
+        $role = Role::where('level', 4)->first();
         $data['role'] = $role;
-        $usertype = UserType::where('name', 'LIKE', '%' . 'Primary' . '%')->first();
+        $usertype = UserType::where('level', 1)->first();
         $data['usertype'] = $usertype;
-        return view('backend.student.add', $data);
+        $school = School::where('name', 'LIKE', '%' . 'High' . '%')->first();
+        $data['school'] = $school;
+        $data['title'] = $this->title;
+        return view('backend.student.high.add', $data);
     }
 
     public function store(Request $request){
@@ -37,6 +63,7 @@ class StudentController extends Controller
             $user = new User();
             $user->user_type_id = $request->user_type_id;
             $user->role_id = $request->role_id;
+            $user->school_id = $request->school_id;
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
             $user->name = $user->first_name . ' ' . $user->last_name;
@@ -72,6 +99,8 @@ class StudentController extends Controller
             $student = new Student();
             $student->user_id =$user->id;
             $student->sponsor = $request->sponsor;
+            $student->first_name = $request->sponsor_first_name;
+            $student->last_name = $request->sponsor_last_name;
             $student->phone = $request->sponsor_phone;
             $student->email = $request->sponsor_email;
             $student->address = $request->sponsor_address;
@@ -87,19 +116,36 @@ class StudentController extends Controller
 
         });
 
-        return redirect()->route('admin.student');
+        return redirect()->route('admin.student.high');
+    }
+
+    public function edit($id){
+        $role = Role::where('level', 4)->first();
+        $data['role'] = $role;
+        $usertype = UserType::where('level', 1)->first();
+        $data['usertype'] = $usertype;
+        $school = School::where('name', 'LIKE', '%' . 'High' . '%')->first();
+        $data['school'] = $school;
+        $data['title'] = $this->title;
+        /*  */
+        $user = User::with(['role', 'usertype', 'school', 'health', 'student'])->find($id);
+        //dd($user->date_of_birth);
+        $data['user'] = $user;
+        $data['title'] = $this->title;
+        return view('backend.student.high.edit', $data);
     }
 
    public function view(){
-        return view('backend.student.view');
+        return view('backend.student.high.view');
    }
 
    public function randomString($length) {
-    $keys = array_merge(range(0,9), range('a', 'z'));
-    $key = "";
-    for($i=0; $i < $length; $i++) {
-        $key .= $keys[mt_rand(0, count($keys) - 1)];
+        $keys = array_merge(range(0,9), range('a', 'z'));
+        $key = "";
+        for($i=0; $i < $length; $i++) {
+            $key .= $keys[mt_rand(0, count($keys) - 1)];
+        }
+        return $key;
     }
-    return $key;
-}
+
 }
