@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Students</li>
+                    <li class="breadcrumb-item text-muted">High School</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -148,12 +148,12 @@
                                 <!--end::Price=-->
                                 <!--begin::Status=-->
                                 <td class="text-end pe-0">
-                                    {{ $user->code }}
+                                    {{ isset($user->code) ? $user->code : 'Encrypted' }}
                                 </td>
                                 <!--end::Status=-->
                                 <!--begin::Action=-->
                                 <td class="text-end">
-                                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+                                    <a href="javascript:;" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                                     <span class="svg-icon svg-icon-5 m-0">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -170,12 +170,12 @@
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">View</a>
+                                            <a href="{{ route('admin.student.high.view', $user->id) }}" class="menu-link px-3">View</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Delete</a>
+                                            <a href="{{ route('admin.student.high.delete', $user->id) }}" class="menu-link px-3" >Delete</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>
@@ -189,6 +189,9 @@
                         <!--end::Table body-->
                     </table>
                     <!--end::Table-->
+                        <div class="my-2 d-flex justify-content-end">
+                            {{ $students->links() }}
+                        </div>
                     @endif
 
                     @if( isset($results) )
@@ -255,12 +258,12 @@
                                 <!--end::Price=-->
                                 <!--begin::Status=-->
                                 <td class="text-end pe-0">
-                                    {{ $user->code }}
+                                    {{ isset($user->code) ? $user->code : 'Encrypted' }}
                                 </td>
                                 <!--end::Status=-->
                                 <!--begin::Action=-->
                                 <td class="text-end">
-                                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+                                    <a href="javascript:;" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                                     <span class="svg-icon svg-icon-5 m-0">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -272,17 +275,17 @@
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Edit</a>
+                                            <a href="{{ route('admin.student.high.edit', $user->id) }}" class="menu-link px-3">Edit</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">View</a>
+                                            <a href="{{ route('admin.student.high.view', $user->id) }}" class="menu-link px-3">View</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Delete</a>
+                                            <a href="{{ route('admin.student.high.delete', $user->id) }}" class="menu-link px-3" >Delete</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>
@@ -296,6 +299,9 @@
                         <!--end::Table body-->
                     </table>
                     <!--end::Table-->
+                        <div class="my-2 d-flex justify-content-end">
+                            {{ $results->links() }}
+                        </div>
                     @endif
                 </div>
                 <!--end::Card body-->

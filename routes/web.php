@@ -225,7 +225,7 @@ Route::prefix('admin')->group(function() {
         Route::post('/store',[StudentController::class, 'store'])->name('admin.student.store');
         Route::get('/edit/{id}',[StudentController::class, 'edit'])->name('admin.student.edit');
         Route::post('/update/{id}',[StudentController::class, 'update'])->name('admin.student.update');
-        Route::get('/view/{id}',[StudentController::class, 'store'])->name('admin.student.view');
+        Route::get('/view',[StudentController::class, 'view'])->name('admin.student.view');
         Route::get('/delete/{id}',[StudentController::class, 'delete'])->name('admin.student.delete');
         /* Students High */
         Route::prefix('high')->group(function() {
@@ -235,7 +235,7 @@ Route::prefix('admin')->group(function() {
             Route::post('/store',[StudentHighController::class, 'store'])->name('admin.student.high.store');
             Route::get('/edit/{id}',[StudentHighController::class, 'edit'])->name('admin.student.high.edit');
             Route::post('/update/{id}',[StudentHighController::class, 'update'])->name('admin.student.high.update');
-            Route::get('/view/{id}',[StudentHighController::class, 'store'])->name('admin.student.high.view');
+            Route::get('/view/{id}',[StudentHighController::class, 'view'])->name('admin.student.high.view');
             Route::get('/delete/{id}',[StudentHighController::class, 'delete'])->name('admin.student.high.delete');
         });
         /* Students Primary */
@@ -246,7 +246,7 @@ Route::prefix('admin')->group(function() {
             Route::post('/store',[StudentPrimaryController::class, 'store'])->name('admin.student.primary.store');
             Route::get('/edit/{id}',[StudentPrimaryController::class, 'edit'])->name('admin.student.primary.edit');
             Route::post('/update/{id}',[StudentPrimaryController::class, 'update'])->name('admin.student.primary.update');
-            Route::get('/view/{id}',[StudentPrimaryController::class, 'store'])->name('admin.student.primary.view');
+            Route::get('/view/{id}',[StudentPrimaryController::class, 'view'])->name('admin.student.primary.view');
             Route::get('/delete/{id}',[StudentPrimaryController::class, 'delete'])->name('admin.student.primary.delete');
         });
 
@@ -260,17 +260,28 @@ Route::prefix('admin')->group(function() {
     });
 
 
-
     /* Teacher */
     Route::prefix('teacher')->group(function() {
         Route::get('/',[TeacherController::class, 'index'])->name('admin.teacher');
+        Route::get('/search',[TeacherController::class, 'search'])->name('admin.teacher.search');
         Route::get('/add',[TeacherController::class, 'add'])->name('admin.teacher.add');
+        Route::post('/store',[TeacherController::class, 'store'])->name('admin.teacher.store');
+        Route::get('/edit/{id}',[TeacherController::class, 'edit'])->name('admin.teacher.edit');
+        Route::post('/update/{id}',[TeacherController::class, 'update'])->name('admin.teacher.update');
+        Route::get('/view/{id}',[TeacherController::class, 'view'])->name('admin.teacher.view');
+        Route::get('/delete/{id}',[TeacherController::class, 'delete'])->name('admin.teacher.delete');
     });
 
     /* Staff */
     Route::prefix('staff')->group(function() {
         Route::get('/',[StaffController::class, 'index'])->name('admin.staff');
+        Route::get('/search',[StaffController::class, 'search'])->name('admin.staff.search');
         Route::get('/add',[StaffController::class, 'add'])->name('admin.staff.add');
+        Route::post('/store',[StaffController::class, 'store'])->name('admin.staff.store');
+        Route::get('/edit/{id}',[StaffController::class, 'edit'])->name('admin.staff.edit');
+        Route::post('/update/{id}',[StaffController::class, 'update'])->name('admin.staff.update');
+        Route::get('/view/{id}',[StaffController::class, 'view'])->name('admin.staff.view');
+        Route::get('/delete/{id}',[StaffController::class, 'delete'])->name('admin.staff.delete');
     });
     
     Route::get('/student/class',[StudenClassController::class, 'index'])->name('admin.student.class');

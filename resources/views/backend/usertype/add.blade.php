@@ -104,16 +104,11 @@
                                         <option value="">Select an option.</option>
                                         <option value="1" >Student</option>
                                         <option value="2" >Teacher</option>
-                                        <option value="3" >HOD</option>
-                                        <option value="4" >Senior Teacher</option>
-                                        <option value="5" >Bursar</option>
-                                        <option value="6" >Accounts</option>
-                                        <option value="7" >Sports</option>
-                                        <option value="8" >Library</option>
-                                        <option value="9" >Club</option>
-                                        <option value="10" >Front Office</option>
-                                        <option value="11" >Staff</option>
-                                        <option value="12" >Head</option>
+                                        <option value="3" >Staff</option>
+                                        <option value="4" >Accounts</option>
+                                        <option value="5" >Sports</option>
+                                        <option value="6" >Library</option>
+                                        <option value="7" >Head</option>
                                     </select>
                                     <!--end::Input-->
                                 </div>

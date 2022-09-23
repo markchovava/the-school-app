@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Users</li>
+                    <li class="breadcrumb-item text-muted">Primary School</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -37,7 +37,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark">Teacher List</li>
+                    <li class="breadcrumb-item text-dark">Student List</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -58,7 +58,7 @@
                     <!--begin::Card title-->
                     <div class="card-title">
                         <!--begin::Search-->
-                        <form method="GET" action="{{ route('admin.teacher.search') }}" class="d-flex align-items-center position-relative my-1">
+                        <form method="GET" action="{{ route('admin.student.primary.search') }}" class="d-flex align-items-center position-relative my-1">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                             <span class="svg-icon svg-icon-1 position-absolute ms-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -76,7 +76,7 @@
                     <!--begin::Card toolbar-->
                     <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
                         <!--begin::Add product-->
-                        <a href="{{ route('admin.teacher.add') }}" class="btn btn-primary">Add Teacher</a>
+                        <a href="{{ route('admin.student.primary.add') }}" class="btn btn-primary">Add Student</a>
                         <!--end::Add product-->
                     </div>
                     <!--end::Card toolbar-->
@@ -165,17 +165,17 @@
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.teacher.edit', $user->id) }}" class="menu-link px-3">Edit</a>
+                                            <a href="{{ route('admin.student.primary.edit', $user->id) }}" class="menu-link px-3">Edit</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.teacher.view', $user->id) }}" class="menu-link px-3">View</a>
+                                            <a href="{{ route('admin.student.primary.view', $user->id) }}" class="menu-link px-3">View</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.teacher.delete', $user->id) }}" class="menu-link px-3" >Delete</a>
+                                            <a href="{{ route('admin.student.primary.delete', $user->id) }}" class="menu-link px-3" >Delete</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>
@@ -275,17 +275,17 @@
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.teacher.edit', $user->id) }}" class="menu-link px-3">Edit</a>
+                                            <a href="{{ route('admin.student.primary.edit', $user->id) }}" class="menu-link px-3">Edit</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.teacher.view', $user->id) }}" class="menu-link px-3">View</a>
+                                            <a href="{{ route('admin.student.primary.view', $user->id) }}" class="menu-link px-3">View</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.teacher.delete', $user->id) }}" class="menu-link px-3" >Delete</a>
+                                            <a href="{{ route('admin.student.primary.delete', $user->id) }}" class="menu-link px-3" >Delete</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>

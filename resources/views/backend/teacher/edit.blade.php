@@ -67,7 +67,7 @@
                 <!--begin::Content-->
                 <div id="kt_account_settings_profile_details" class="collapse show">
                     <!--begin::Form-->
-                    <form method="POST" action="{{ route('admin.teacher.store') }}" enctype="multipart/form-data" class="form">
+                    <form method="POST" action="{{ route('admin.teacher.update', $user->id) }}" enctype="multipart/form-data" class="form">
                         @csrf
                         <!-- Role -->
                         <input type="hidden" name="role_id" value="{{ $role->id }}">
@@ -87,7 +87,7 @@
                                     <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
                                         <!--begin::Preview existing avatar-->
                                         <div class="image-input-wrapper w-125px h-125px"
-                                        style="background-image: url({{ url('storage/no_image.jpg') }});" alt=""></div>
+                                        style="background-image: url({{ isset($user->image) ? url('storage/images/users/' . $user->image) : url('storage/images/no_image.jpg') }});" alt=""></div>
                                         <!--end::Preview existing avatar-->
                                         <!--begin::Label-->
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
@@ -130,7 +130,9 @@
                                     data-placeholder="Select an Option..." class="form-select form-select-solid form-select-lg">
                                         <option value="">Select an Option...</option>
                                         @foreach($schools as $school)
-                                        <option value="{{ $school->id }}">{{ $school->name }}</option>
+                                        <option value="{{ $school->id }}" {{ $school->id == $user->school_id ? 'selected="selected"' : '' }}>
+                                            {{ $school->name }}
+                                        </option>
                                         @endforeach
                                     </select>
                                     <!--end::Input-->
@@ -151,12 +153,14 @@
                                     <div class="row">
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
-                                            <input type="text" name="first_name"  class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Your First Name...." />
+                                            <input type="text" name="first_name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" 
+                                            value="{{ $user->first_name }}"placeholder="Your First Name...." />
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
-                                            <input type="text" name="last_name" class="form-control form-control-lg form-control-solid" placeholder="Your Last Name..." />
+                                            <input type="text" name="last_name" class="form-control form-control-lg form-control-solid" 
+                                            value="{{ $user->last_name }}" placeholder="Your Last Name..." />
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -176,9 +180,9 @@
                                     <select name="marital_status" aria-label="Select an Option." data-control="select2" 
                                     data-placeholder="Select an Option." class="form-select form-select-solid form-select-lg">
                                         <option value="">Select an Option.</option>
-                                        <option value="Married">Married</option>
-                                        <option value="Single">Single</option>
-                                        <option value="Other">Other</option>
+                                        <option value="Married" {{ $user->teacher->marital_status == 'Married' ? 'selected="selected"' : '' }}>Married</option>
+                                        <option value="Single" {{ $user->teacher->marital_status == 'Single' ? 'selected="selected"' : '' }}>Single</option>
+                                        <option value="Other" {{ $user->teacher->marital_status == 'Other' ? 'selected="selected"' : '' }}>Other</option>
                                     </select>
                                     <!--end::Input-->
                                 </div>
@@ -192,9 +196,13 @@
                                     <span class="required"><b>Date of Birth:</b></span>
                                 </label>
                                 <!--end::Label-->
+                                @php 
+                                    $dob = explode(" ", $user->date_of_birth);
+                                @endphp
                                 <!--begin::Col-->
                                 <div class="col-lg-2 fv-row d-flex">
-                                    <input type="number" name="day" class="form-control form-control-lg form-control-solid" placeholder="DD" />
+                                    <input type="number" name="day" class="form-control form-control-lg form-control-solid" 
+                                    value="{{ $dob[0] }}" placeholder="DD" />
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
@@ -203,18 +211,18 @@
                                     <select name="month" aria-label="Select a Month..." data-control="select2" 
                                         placeholder="Select a Month..." class="form-select form-select-solid form-select-lg">
                                         <option value="">Select an option.</option>
-                                        <option value="January">January</option>
-                                        <option value="February">February</option>
-                                        <option value="March">March</option>
-                                        <option value="April">April</option>
-                                        <option value="May">May</option>
-                                        <option value="June">June</option>
-                                        <option value="July">July</option>
-                                        <option value="August">August</option>
-                                        <option value="September">September</option>
-                                        <option value="October">October</option>
-                                        <option value="November">November</option>
-                                        <option value="December">December</option>
+                                        <option value="January" {{ $dob[1] == 'January' ? 'selected="selected"' : '' }} >January</option>
+                                        <option value="February" {{ $dob[1] == 'February' ? 'selected="selected"' : '' }} >February</option>
+                                        <option value="March" {{ $dob[1] == 'March' ? 'selected="selected"' : '' }} >March</option>
+                                        <option value="April" {{ $dob[1] == 'April' ? 'selected="selected"' : '' }}>April</option>
+                                        <option value="May" {{ $dob[1] == 'May' ? 'selected="selected"' : '' }}>May</option>
+                                        <option value="June" {{ $dob[1] == 'June' ? 'selected="selected"' : '' }}>June</option>
+                                        <option value="July" {{ $dob[1] == 'July' ? 'selected="selected"' : '' }}>July</option>
+                                        <option value="August" {{ $dob[1] == 'August' ? 'selected="selected"' : '' }}>August</option>
+                                        <option value="September" {{ $dob[1] == 'September' ? 'selected="selected"' : '' }}>September</option>
+                                        <option value="October" {{ $dob[1] == 'October' ? 'selected="selected"' : '' }}>October</option>
+                                        <option value="November" {{ $dob[1] == 'November' ? 'selected="selected"' : '' }}>November</option>
+                                        <option value="December" {{ $dob[1] == 'December' ? 'selected="selected"' : '' }}>December</option>
                                     </select>
                                     <!--end::Input-->
                                 </div>
@@ -222,7 +230,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-3 fv-row d-flex">
                                     <input type="number" name="year" class="form-control form-control-lg form-control-solid" 
-                                    min="1900" placeholder="2022" />
+                                    value="{{ $dob[2] }}" min="1900" placeholder="2022" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -238,8 +246,8 @@
                                     <select name="gender" aria-label="Select a Gender" data-control="select2" 
                                     data-placeholder="Select a Gender..." class="form-select form-select-solid form-select-lg">
                                         <option value="">Select a Gender.</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="Male" {{ $user->gender == 'Male' ? 'selected="selected"' : '' }}>Male</option>
+                                        <option value="Female" {{ $user->gender == 'Female' ? 'selected="selected"' : '' }}>Female</option>
                                     </select>
                                     <!--end::Input-->
                                 </div>
@@ -254,7 +262,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
                                     <input type="text" name="phone" class="form-control form-control-lg form-control-solid" 
-                                    placeholder="+263 (0) 782 123123" />
+                                    value="{{ $user->phone }}" placeholder="+263 (0) 782 123123" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -266,7 +274,8 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="abc@example.come" />
+                                    <input type="email" name="email" class="form-control form-control-lg form-control-solid" 
+                                    value="{{ $user->email }}" placeholder="abc@example.come" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -279,7 +288,8 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="Address"/>
+                                    <input type="text" name="address" class="form-control form-control-lg form-control-solid" 
+                                    value="{{ $user->address }}" placeholder="Address"/>
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -292,7 +302,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
                                     <input type="text" name="nationality" class="form-control form-control-lg form-control-solid" 
-                                    placeholder="eg. Zimbabwean etc."/>
+                                    value="{{ $user->nationality }}" placeholder="eg. Zimbabwean etc."/>
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -305,7 +315,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
                                     <input type="text" name="religion" class="form-control form-control-lg form-control-solid" 
-                                    placeholder="eg. Christian etc."/>
+                                    value="{{ $user->religion }}" placeholder="eg. Christian etc."/>
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -319,7 +329,8 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
-                                    <input type="text" name="id_number"  class="form-control form-control-lg form-control-solid" placeholder="63-04576 Z 05" />
+                                    <input type="text" name="id_number"  class="form-control form-control-lg form-control-solid" 
+                                    value="{{ $user->id_number }}" placeholder="63-04576 Z 05" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -334,7 +345,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
                                     <textarea name="qualification" class="form-control form-control-lg form-control-solid" 
-                                    placeholder="Eg. Bachelor of Arts in ...."></textarea>
+                                    placeholder="Eg. Bachelor of Arts in ....">{{ $user->teacher->qualification }}</textarea>
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -349,7 +360,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
                                     <textarea name="experience" class="form-control form-control-lg form-control-solid" 
-                                    placeholder="Eg. 5 years experence in ...."></textarea>
+                                    placeholder="Eg. 5 years experence in ....">{{ $user->teacher->experience }}</textarea>
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -370,7 +381,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
                                     <input type="text" name="allergy" class="form-control form-control-lg form-control-solid" 
-                                    placeholder="eg. Flower Allergy etc." />
+                                    value="{{ $user->health->allergy }}" placeholder="eg. Flower Allergy etc." />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -385,7 +396,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
                                     <input type="text" name="illness" class="form-control form-control-lg form-control-solid" 
-                                    placeholder="eg. Asthma etc." />
+                                    value="{{ $user->health->illness }}" placeholder="eg. Asthma etc." />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -409,11 +420,12 @@
                                 <div class="col-lg-8 fv-row d-flex">
                                      <!--begin::Input-->
                                      <input type="text" name="next_of_kin"  class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" 
-                                     placeholder="Next of Kin..." />
+                                     value="{{ $user->teacher->next_of_kin }}" placeholder="Next of Kin..." />
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Col-->
                             </div>
+
                             <!--end::Input group-->
                              <!--begin::Input group-->
                              <div class="row mb-6">
@@ -427,13 +439,14 @@
                                     <div class="row">
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
-                                            <input type="text" name="kin_first_name"  class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Your First Name...." />
+                                            <input type="text" name="kin_first_name"  class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" 
+                                            value="{{ $user->teacher->first_name }}" placeholder="Your First Name...." />
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
                                             <input type="text" name="kin_last_name" class="form-control form-control-lg form-control-solid" 
-                                            placeholder="Your Last Name..." />
+                                            value="{{ $user->teacher->last_name }}" placeholder="Your Last Name..." />
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -450,7 +463,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
                                     <input type="text" name="kin_phone" class="form-control form-control-lg form-control-solid" 
-                                    placeholder="+263 (0) 782 123123" />
+                                    value="{{ $user->teacher->phone }}" placeholder="+263 (0) 782 123123" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -463,7 +476,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
                                     <input type="text" name="kin_email" class="form-control form-control-lg form-control-solid" 
-                                    placeholder="abc@example.com" />
+                                    value="{{ $user->teacher->email }}"placeholder="abc@example.com" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -478,7 +491,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
                                     <textarea name="kin_address" class="form-control form-control-lg form-control-solid" 
-                                    placeholder="12, First Street, Avonlea, Harare"></textarea>
+                                    placeholder="12, First Street, Avonlea, Harare">{{ $user->teacher->address }}</textarea>
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -491,7 +504,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
                                     <input type="text" name="kin_occupation" class="form-control form-control-lg form-control-solid" 
-                                    placeholder="Managing Director" />
+                                    value="{{ $user->teacher->occupation }}" placeholder="Managing Director" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -504,7 +517,7 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
                                     <input type="text" name="kin_company_name" class="form-control form-control-lg form-control-solid" 
-                                    placeholder="Old Mutual" />
+                                    value="{{ $user->teacher->company_name }}" placeholder="Old Mutual" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -515,7 +528,7 @@
                         <!--begin::Actions-->
                         <div class="card-footer d-flex justify-content-end py-6 px-9">
                            
-                            <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Add</button>
+                            <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Update</button>
                         </div>
                         <!--end::Actions-->
                     </form>

@@ -67,7 +67,7 @@
                 <!--begin::Content-->
                 <div id="kt_account_settings_profile_details" class="collapse show">
                     <!--begin::Form-->
-                    <form method="POST" action="{{ route('admin.student.high.store') }}" enctype="multipart/form-data" class="form">
+                    <form method="POST" action="{{ route('admin.student.high.update', $user->id) }}" enctype="multipart/form-data" class="form">
                         @csrf
                         <!-- Role -->
                         <input type="hidden" name="role_id" value="{{ $role->id }}">
@@ -459,7 +459,7 @@
                         <!--begin::Actions-->
                         <div class="card-footer d-flex justify-content-end py-6 px-9">
                            
-                            <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Add Info</button>
+                            <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Update</button>
                         </div>
                         <!--end::Actions-->
                     </form>

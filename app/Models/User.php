@@ -6,6 +6,7 @@ use App\Models\Health\Health;
 use App\Models\Role\Role;
 use App\Models\School\School;
 use App\Models\Student\Student;
+use App\Models\Teacher\Teacher;
 use App\Models\User\UserType;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -88,5 +89,9 @@ class User extends Authenticatable
 
     public function student(){
         return $this->hasOne(Student::class, 'user_id', 'id');
+    }
+
+    public function teacher(){
+        return $this->hasOne(Teacher::class, 'user_id', 'id');
     }
 }

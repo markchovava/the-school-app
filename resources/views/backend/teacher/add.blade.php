@@ -11,7 +11,7 @@
             <!--begin::Page title-->
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">User Account</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Student Account</h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -20,7 +20,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{ url('/') }}" class="text-muted text-hover-primary">User</a>
+                        <a href="{{ url('/') }}" class="text-muted text-hover-primary">{{ isset($title) ? $title : '||'}}</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -29,7 +29,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Account</li>
+                    <li class="breadcrumb-item text-muted">Teacher</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -67,14 +67,19 @@
                 <!--begin::Content-->
                 <div id="kt_account_settings_profile_details" class="collapse show">
                     <!--begin::Form-->
-                    <form method="POST" action="" enctype="multipart/form-data" class="form">
+                    <form method="POST" action="{{ route('admin.teacher.store') }}" enctype="multipart/form-data" class="form">
                         @csrf
+                        <!-- Role -->
+                        <input type="hidden" name="role_id" value="{{ $role->id }}">
+                        <!-- User Type -->
+                        <input type="hidden" name="user_type_id" value="{{ $usertype->id}}">
+                        
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-bold fs-6"> <b>Avatar</b> </label>
+                                <label class="col-lg-4 col-form-label fw-bold fs-6"><b>Avatar</b></label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
@@ -112,6 +117,28 @@
                                 <!--end::Col-->
                             </div>
                             <!--end::Input group-->
+                            @if( isset($schools) )
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6"><b>School:</b></label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <!--begin::Input-->
+                                    <select name="school_id" aria-label="Select an Option..." data-control="select2" required="required"
+                                    data-placeholder="Select an Option..." class="form-select form-select-solid form-select-lg">
+                                        <option value="">Select an Option...</option>
+                                        @foreach($schools as $school)
+                                        <option value="{{ $school->id }}">{{ $school->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            @endif
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
@@ -134,6 +161,26 @@
                                         <!--end::Col-->
                                     </div>
                                     <!--end::Row-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6"><b>Marital Status:</b></label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <!--begin::Input-->
+                                    <select name="marital_status" aria-label="Select an Option." data-control="select2" 
+                                    data-placeholder="Select an Option." class="form-select form-select-solid form-select-lg">
+                                        <option value="">Select an Option.</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <!--end::Input-->
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -174,7 +221,8 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-lg-3 fv-row d-flex">
-                                    <input type="number" name="year" class="form-control form-control-lg form-control-solid" placeholder="2022" />
+                                    <input type="number" name="year" class="form-control form-control-lg form-control-solid" 
+                                    min="1900" placeholder="2022" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -198,28 +246,6 @@
                                 <!--end::Col-->
                             </div>
                             <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                   <b>Marital Status:</b>
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row d-flex">
-                                     <!--begin::Input-->
-                                    <select name="marital_status" aria-label="Select Option..." data-control="select2" 
-                                      data-placeholder="Select Option..." class="form-select form-select-solid form-select-lg">
-                                        <option value="">Select Option...</option>
-                                        <option value="Parent">Single</option>
-                                        <option value="Guardian">Married</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <!--end::Input-->
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
                              <!--begin::Input group-->
                              <div class="row mb-6">
                                 <!--begin::Label-->
@@ -227,7 +253,8 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="phone_number" class="form-control form-control-lg form-control-solid" placeholder="+263 (0) 782 123123" />
+                                    <input type="text" name="phone" class="form-control form-control-lg form-control-solid" 
+                                    placeholder="+263 (0) 782 123123" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -264,7 +291,21 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="nationality" class="form-control form-control-lg form-control-solid" placeholder="Zimbwean"/>
+                                    <input type="text" name="nationality" class="form-control form-control-lg form-control-solid" 
+                                    placeholder="eg. Zimbabwean etc."/>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6"><b>Religion:</b></label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="religion" class="form-control form-control-lg form-control-solid" 
+                                    placeholder="eg. Christian etc."/>
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -287,13 +328,13 @@
                             <div class="row mb-6">
                                 <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                   <b>Qualification:</b>
+                                   <b>Qualifications:</b>
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
-                                    <textarea name="qualification"  class="form-control form-control-lg form-control-solid" 
-                                    placeholder="BSc in Teaching - 2010 - CIS; BSc in Arts - 2009 - CIS"></textarea>
+                                    <textarea name="qualification" class="form-control form-control-lg form-control-solid" 
+                                    placeholder="Eg. Bachelor of Arts in ...."></textarea>
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -307,8 +348,29 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
-                                    <textarea name="experience"  class="form-control form-control-lg form-control-solid" 
-                                    placeholder="2008 - 2012 Teacher at Allan Wilson"></textarea>
+                                    <textarea name="experience" class="form-control form-control-lg form-control-solid" 
+                                    placeholder="Eg. 5 years experence in ...."></textarea>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Card title-->
+                            <div class="card-title m-0 mt-3">
+                                <h3 class="fw-bolder m-0">Health Condition </h3>
+                            </div>
+                            <!--end::Card title-->
+                            <hr>
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                   <b>Allergy:</b>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row d-flex">
+                                    <input type="text" name="allergy" class="form-control form-control-lg form-control-solid" 
+                                    placeholder="eg. Flower Allergy etc." />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -317,24 +379,25 @@
                             <div class="row mb-6">
                                 <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                   <b>Health Condition:</b>
+                                   <b>Illness:</b>
                                 </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
-                                    <textarea type="text" name="health_condition"  class="form-control form-control-lg form-control-solid" 
-                                    placeholder="Flower Allergy, Flu, Asthma"></textarea>
+                                    <input type="text" name="illness" class="form-control form-control-lg form-control-solid" 
+                                    placeholder="eg. Asthma etc." />
                                 </div>
                                 <!--end::Col-->
                             </div>
                             <!--end::Input group-->
                             
                             <!--begin::Card title-->
-                            <div class="card-title m-0 mt-3">
-                                <h3 class="fw-bolder m-0">Next of Kin</h3>
+                            <div class="card-title m-0 mt-3 mb-6">
+                                <h3 class="fw-bolder m-0">Parent or Guardian</h3>
                             </div>
                             <!--end::Card title-->
                             <hr>
+
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
@@ -345,8 +408,8 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
                                      <!--begin::Input-->
-                                     <input type="text" name="next_of_kin" class="form-control form-control-lg form-control-solid" 
-                                     placeholder="Wife or Father etc." />
+                                     <input type="text" name="next_of_kin"  class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" 
+                                     placeholder="Next of Kin..." />
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Col-->
@@ -386,7 +449,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="kin_phone_number" class="form-control form-control-lg form-control-solid" 
+                                    <input type="text" name="kin_phone" class="form-control form-control-lg form-control-solid" 
                                     placeholder="+263 (0) 782 123123" />
                                 </div>
                                 <!--end::Col-->
@@ -414,13 +477,12 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row d-flex">
-                                    <textarea name="kin_address"  class="form-control form-control-lg form-control-solid" 
+                                    <textarea name="kin_address" class="form-control form-control-lg form-control-solid" 
                                     placeholder="12, First Street, Avonlea, Harare"></textarea>
                                 </div>
                                 <!--end::Col-->
                             </div>
                             <!--end::Input group-->
-                            
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
@@ -453,7 +515,7 @@
                         <!--begin::Actions-->
                         <div class="card-footer d-flex justify-content-end py-6 px-9">
                            
-                            <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save</button>
+                            <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Add</button>
                         </div>
                         <!--end::Actions-->
                     </form>

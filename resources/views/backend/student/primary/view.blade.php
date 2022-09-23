@@ -239,7 +239,7 @@
                     </div>
                     <!--end::Card title-->
                     <!--begin::Action-->
-                    <a href="{{ route('admin.student.high.edit', $user->id) }}" class="btn btn-primary align-self-center">Edit Profile</a>
+                    <a href="{{ route('admin.student.primary.edit', $user->id) }}" class="btn btn-primary align-self-center">Edit Profile</a>
                     <!--end::Action-->
                 </div>
                 <!--begin::Card header-->
